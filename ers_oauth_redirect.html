@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>eRS Access Token</title></head>
+<body>
+  <h1>✅ eRS Access Token Captured</h1>
+  <p id="token-display">Parsing token...</p>
+  <script>
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const token = params.get("access_token");
+    document.getElementById("token-display").innerHTML = token
+      ? `<b>Access Token:</b><br><code>${token}</code><br><br><em>Copy this into PowerShell</em>`
+      : "❌ No token found.";
+  </script>
+</body>
+</html>

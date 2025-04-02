@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html>
-<head><title>eRS Access Token</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>eRS OAuth Code Captured</title>
+</head>
 <body>
-  <h1>✅ eRS Access Token Captured</h1>
-  <p id="token-display">Parsing token...</p>
+  <h1>✅ eRS Authorization Code Captured</h1>
+  <p id="output">Parsing code...</p>
+
   <script>
-    const params = new URLSearchParams(window.location.hash.substring(1));
-    const token = params.get("access_token");
-    document.getElementById("token-display").innerHTML = token
-      ? `<b>Access Token:</b><br><code>${token}</code><br><br><em>Copy this into PowerShell</em>`
-      : "❌ No token found.";
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+
+    if (code) {
+      document.getElementById("output").innerHTML = `
+        <strong>Authorization Code:</strong><br>
+        <code>${code}</code><br><br>
+        <em>Copy and paste this code into your PowerShell script to get the access token.</em>
+      `;
+    } else {
+      document.getElementById("output").innerText = "❌ No authorization code found in URL.";
+    }
   </script>
 </body>
 </html>
+
